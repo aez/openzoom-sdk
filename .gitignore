@@ -6,3 +6,6 @@ bin-release
 bin
 docs
 *.swf
+
+.svn
+README-SUBVERSION.txt
