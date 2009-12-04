@@ -22,6 +22,7 @@
 //
 //  Contributor(s):
 //    Daniel Gasienica <daniel@gasienica.ch>
+//    Andy Zeldis <andy.zeldis@frogdesign.com>
 //
 //  Alternatively, the contents of this file may be used under the terms of
 //  either the GNU General Public License Version 3 or later (the "GPL"), or
@@ -248,6 +249,15 @@ public final class ImagePyramidRenderManager implements IDisposable
 
         toLevel = 0
         fromLevel = optimalLevel.index
+
+		// FROG don't load overly-small things as they create a "bloom" effect
+		// TODO parameterize min toLevel
+        toLevel = 7
+        fromLevel = optimalLevel.index
+        
+        if(toLevel > fromLevel) {
+        	toLevel = Math.max(0, fromLevel-1)
+        }
 
         var level:IImagePyramidLevel
         var nextTile:ImagePyramidTile
