@@ -55,16 +55,16 @@ import org.openzoom.flash.components.SceneNavigator; SceneNavigator
 import org.openzoom.flash.components.Spinner; Spinner
 
     // Descriptors
-import org.openzoom.flash.descriptors.deepzoom.DeepZoomCollectionDescriptor; DeepZoomCollectionDescriptor
+//import org.openzoom.flash.descriptors.deepzoom.DeepZoomCollectionDescriptor; DeepZoomCollectionDescriptor
 import org.openzoom.flash.descriptors.deepzoom.DeepZoomImageDescriptor; DeepZoomImageDescriptor
-import org.openzoom.flash.descriptors.djatoka.DjatokaDescriptor; DjatokaDescriptor
-import org.openzoom.flash.descriptors.gigapan.GigaPanDescriptor; GigaPanDescriptor
-import org.openzoom.flash.descriptors.openstreetmap.OpenStreetMapDescriptor; OpenStreetMapDescriptor
-import org.openzoom.flash.descriptors.openzoom.OpenZoomDescriptor; OpenZoomDescriptor
-import org.openzoom.flash.descriptors.rosettaproject.RosettaDiskBackDescriptor; RosettaDiskBackDescriptor
-import org.openzoom.flash.descriptors.rosettaproject.RosettaDiskFrontDescriptor; RosettaDiskFrontDescriptor
-import org.openzoom.flash.descriptors.virtualearth.VirtualEarthDescriptor; VirtualEarthDescriptor
-import org.openzoom.flash.descriptors.zoomify.ZoomifyDescriptor; ZoomifyDescriptor
+//import org.openzoom.flash.descriptors.djatoka.DjatokaDescriptor; DjatokaDescriptor
+//import org.openzoom.flash.descriptors.gigapan.GigaPanDescriptor; GigaPanDescriptor
+//import org.openzoom.flash.descriptors.openstreetmap.OpenStreetMapDescriptor; OpenStreetMapDescriptor
+//import org.openzoom.flash.descriptors.openzoom.OpenZoomDescriptor; OpenZoomDescriptor
+//import org.openzoom.flash.descriptors.rosettaproject.RosettaDiskBackDescriptor; RosettaDiskBackDescriptor
+//import org.openzoom.flash.descriptors.rosettaproject.RosettaDiskFrontDescriptor; RosettaDiskFrontDescriptor
+//import org.openzoom.flash.descriptors.virtualearth.VirtualEarthDescriptor; VirtualEarthDescriptor
+//import org.openzoom.flash.descriptors.zoomify.ZoomifyDescriptor; ZoomifyDescriptor
 
     // Utils
 import org.openzoom.flash.utils.Base16; Base16
