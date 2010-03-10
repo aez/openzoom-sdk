@@ -6,6 +6,7 @@ bin-release
 bin
 docs
 *.swf
+.settings
 
 .svn
 README-SUBVERSION.txt
