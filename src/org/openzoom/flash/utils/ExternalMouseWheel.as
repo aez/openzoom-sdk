@@ -156,7 +156,8 @@ public final class ExternalMouseWheel extends EventDispatcher
                             delta = evt.wheelDelta / 80;
                             break;
                         }
-                        target.externalMouseEvent(delta);
+                        var ctrlKey = (navigator.userAgent.indexOf('Mac') != -1) ? (event.metaKey || event.ctrlKey) : event.ctrlKey;
+                        target.externalMouseEvent(delta, event.shiftKey, event.altKey, ctrlKey);
                     },
                     false);
                 },
@@ -172,7 +173,7 @@ public final class ExternalMouseWheel extends EventDispatcher
                         if (!target.externalMouseEvent)
                             return;
                         delta = evt.wheelDelta / 80;
-                        target.externalMouseEvent(delta);
+                        target.externalMouseEvent(delta, event.shiftKey, event.altKey, event.ctrlKey);
                     };
                     _unload = function() {
                         target.detachEvent('onmousewheel', _wheel);
@@ -326,10 +327,18 @@ public final class ExternalMouseWheel extends EventDispatcher
     /**
      * @private
      */
-    private function externalMouseEventHandler(delta:Number):void
+    private function externalMouseEventHandler(delta:Number, shiftKey:Boolean, altKey:Boolean, ctrlKey:Boolean):void
     {
         if (!clonedEvent)
             return
+
+		if(delta > 0) {
+			delta = 3;
+		} else if(delta == 0) {
+			delta = 0;
+		} else if(delta < 0) {
+			delta = -3;
+		}
 
         var mouseWheelEvent:MouseEvent =
                                     new MouseEvent(MouseEvent.MOUSE_WHEEL,
@@ -338,9 +347,9 @@ public final class ExternalMouseWheel extends EventDispatcher
                                                    clonedEvent.localX,
                                                    clonedEvent.localY,
                                                    clonedEvent.relatedObject,
-                                                   clonedEvent.ctrlKey,
-                                                   clonedEvent.altKey,
-                                                   clonedEvent.shiftKey,
+                                                   ctrlKey,
+                                                   altKey,
+                                                   shiftKey,
                                                    clonedEvent.buttonDown,
                                                    int(delta))
 
