@@ -17,7 +17,7 @@
 //  The Original Code is the OpenZoom SDK.
 //
 //  The Initial Developer of the Original Code is Daniel Gasienica.
-//  Portions created by the Initial Developer are Copyright (c) 2007-2009
+//  Portions created by the Initial Developer are Copyright (c) 2007-2010
 //  the Initial Developer. All Rights Reserved.
 //
 //  Contributor(s):
@@ -60,6 +60,7 @@ use namespace openzoom_internal;
  * Base class for MultiScaleImage and DeepZoomContainer.
  */
 internal class MultiScaleImageBase extends UIComponent
+                                  /*implements IMultiScaleContainer*/
 {
 	include "../../flash/core/Version.as"
 
@@ -308,7 +309,7 @@ internal class MultiScaleImageBase extends UIComponent
      * @private
      */
     override protected function updateDisplayList(unscaledWidth:Number,
-                                                   unscaledHeight:Number):void
+                                                  unscaledHeight:Number):void
     {
         container.setActualSize(unscaledWidth, unscaledHeight)
     }
@@ -343,6 +344,43 @@ internal class MultiScaleImageBase extends UIComponent
             container.constraint = _constraint
             constraintChanged = false
         }
+
+        if (zoomChanged || scaleChanged ||
+			viewportXChanged || viewportYChanged ||
+			viewportWidthChanged || viewportHeightChanged)
+        {
+            if (zoomChanged)
+            {
+                container.zoom = zoom
+                zoomChanged = false
+            }
+
+            if (scaleChanged)
+            {
+                container.scale = scale
+                scaleChanged = false
+            }
+
+            if (viewportXChanged || viewportYChanged)
+            {
+                container.panTo(viewportX, viewportY)
+                viewportXChanged = viewportYChanged = false
+            }
+
+            if (viewportWidthChanged)
+            {
+                container.viewportWidth = viewportWidth
+                viewportWidthChanged = false
+            }
+
+            if (viewportHeightChanged)
+            {
+                container.viewportHeight = viewportHeight
+                viewportHeightChanged = false
+            }
+
+            dispatchEvent(new Event("viewportChanged"))
+        }
     }
 
     //--------------------------------------------------------------------------
@@ -354,6 +392,174 @@ internal class MultiScaleImageBase extends UIComponent
     private function container_eventHandler(event:Event):void
     {
         dispatchEvent(event.clone())
+    }
+
+    //--------------------------------------------------------------------------
+    //
+    //  Properties: IMultiScaleContainer
+    //
+    //--------------------------------------------------------------------------
+
+    //----------------------------------
+    //  zoom
+    //----------------------------------
+
+    private var _zoom:Number
+    private var zoomChanged:Boolean = false
+
+   ;[Bindable(event="viewportChanged")]
+
+    /**
+     * @copy org.openzoom.flash.viewport.IViewport#zoom
+     */
+    public function get zoom():Number
+    {
+        return _zoom
+    }
+
+    public function set zoom(value:Number):void
+    {
+        if (_zoom != value)
+        {
+            _zoom = value
+            zoomChanged = true
+            invalidateProperties()
+        }
+    }
+
+    //----------------------------------
+    //  scale
+    //----------------------------------
+
+    private var _scale:Number
+    private var scaleChanged:Boolean = false
+
+   ;[Bindable(event="viewportChanged")]
+
+    /**
+     * @copy org.openzoom.flash.viewport.IViewport#scale
+     */
+    public function get scale():Number
+    {
+        return _scale
+    }
+
+    public function set scale(value:Number):void
+    {
+        if (_scale != value)
+        {
+            _scale = value
+            scaleChanged = true
+            invalidateProperties()
+        }
+    }
+
+    //----------------------------------
+    //  viewportX
+    //----------------------------------
+
+    private var _viewportX:Number
+    private var viewportXChanged:Boolean = false
+
+   ;[Bindable(event="viewportChanged")]
+
+    /**
+     * @copy org.openzoom.flash.viewport.IViewport#x
+     */
+
+    public function get viewportX():Number
+    {
+        return viewport ? viewport.x : _viewportX
+    }
+
+    public function set viewportX(value:Number):void
+    {
+        if (_viewportX != value)
+        {
+            _viewportX = value
+            viewportXChanged = true
+            invalidateProperties()
+        }
+    }
+    //----------------------------------
+    //  viewportY
+    //----------------------------------
+
+    private var _viewportY:Number
+    private var viewportYChanged:Boolean = false
+
+   ;[Bindable(event="viewportChanged")]
+
+    /**
+     * @copy org.openzoom.flash.viewport.IViewport#y
+     */
+    public function get viewportY():Number
+    {
+        return viewport ? viewport.y : _viewportY
+    }
+
+    public function set viewportY(value:Number):void
+    {
+        if (_viewportY != value)
+        {
+            _viewportY = value
+            viewportYChanged = true
+            invalidateProperties()
+        }
+    }
+
+    //----------------------------------
+    //  viewportWidth
+    //----------------------------------
+
+    private var _viewportWidth:Number
+    private var viewportWidthChanged:Boolean = false
+
+   ;[Bindable(event="viewportChanged")]
+
+    /**
+     * @copy org.openzoom.flash.viewport.IViewport#width
+     */
+    public function get viewportWidth():Number
+    {
+        return container ? container.viewportWidth : _viewportWidth
+    }
+
+    public function set viewportWidth(value:Number):void
+    {
+        if (_viewportWidth != value)
+        {
+            _viewportWidth = value
+            viewportWidthChanged = true
+            invalidateProperties()
+        }
+    }
+
+    //----------------------------------
+    //  viewportHeight
+    //----------------------------------
+
+    private var _viewportHeight:Number
+    private var viewportHeightChanged:Boolean = false
+
+   ;[Bindable(event="viewportChanged")]
+
+    /**
+     * @copy org.openzoom.flash.viewport.IViewport#height
+     */
+    public function get viewportHeight():Number
+    {
+        return container ? container.viewportHeight : _viewportHeight
+    }
+
+    public function set viewportHeight(value:Number):void
+    {
+        if (_viewportHeight != value)
+        {
+            _viewportHeight = value
+            viewportHeightChanged = true
+            invalidateProperties()
+        }
     }
 
     //--------------------------------------------------------------------------

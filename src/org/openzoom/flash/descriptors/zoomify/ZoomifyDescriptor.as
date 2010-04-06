@@ -17,7 +17,7 @@
 //  The Original Code is the OpenZoom SDK.
 //
 //  The Initial Developer of the Original Code is Daniel Gasienica.
-//  Portions created by the Initial Developer are Copyright (c) 2007-2009
+//  Portions created by the Initial Developer are Copyright (c) 2007-2010
 //  the Initial Developer. All Rights Reserved.
 //
 //  Contributor(s):
@@ -54,8 +54,8 @@ use namespace openzoom_internal;
  * Descriptor for the <a href="http://www.zoomify.com/">Zoomify</a>
  * multiscale image format.
  */
-public class ZoomifyDescriptor extends ImagePyramidDescriptorBase
-                               implements IImagePyramidDescriptor
+public final class ZoomifyDescriptor extends ImagePyramidDescriptorBase
+                                     implements IImagePyramidDescriptor
 {
     include "../../core/Version.as"
 
