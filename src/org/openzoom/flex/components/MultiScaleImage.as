@@ -85,7 +85,7 @@ use namespace openzoom_internal;
  */
 public final class MultiScaleImage extends MultiScaleImageBase
 {
-	include "../../flash/core/Version.as"
+    include "../../flash/core/Version.as"
 
     //--------------------------------------------------------------------------
     //
@@ -160,7 +160,7 @@ public final class MultiScaleImage extends MultiScaleImageBase
                                        urlLoader_securityErrorHandler,
                                        false, 0, true)
         }
-        
+
         if (_source)
         {
             _source = null
